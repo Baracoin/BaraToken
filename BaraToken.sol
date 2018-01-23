@@ -79,6 +79,7 @@ contract TokenERC20 is Owned {
      *
      * Initializes contract with initial supply tokens to the creator of the contract
      */
+     
     function TokenERC20(uint256 initialSupply, string tokenName, string tokenSymbol, address secondOwner) public {
         name = tokenName;
         symbol = tokenSymbol;

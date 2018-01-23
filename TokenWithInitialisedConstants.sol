@@ -82,6 +82,7 @@ contract TokenERC20 is Owned {
      *
      * Initializes contract with initial supply tokens to the creator of the contract
      */
+     
     function TokenERC20() public {
         totalSupply = initialSupply * 10 ** uint256(decimals);
         balanceOf[msg.sender] = totalSupply;
