@@ -14,12 +14,6 @@ contract Owned {
 
 
 
-  function Owned() public {
-    owners[msg.sender] = true;
-  }
-
-
-
   function isOwner(address addressToCheck) view public returns (bool) {
     return owners[addressToCheck];
   }
@@ -68,6 +62,7 @@ contract Owned {
 
 contract TokenERC20 is Owned {
   // Public variables of the token
+  bool public tokenInitialised = false;
   string public name;
   string public symbol;
   uint8 public decimals = 18;
@@ -191,18 +186,21 @@ contract TokenERC20 is Owned {
 
 
 
-  function TokenERC20(uint256 initialSupply, string tokenName, string tokenSymbol, address secondOwner) public {
-      name = tokenName;
-      symbol = tokenSymbol;
-      totalSupply = initialSupply * 10 ** uint256(decimals);
-      balanceOf[msg.sender] = totalSupply;
-      currentSeller = msg.sender;
-      owners[secondOwner] = true;
+  function initialiseToken() public {
+    require(!tokenInitialised);
+    name = "BaraToken";
+    symbol = "BRT";
+    totalSupply = 160000000 * 10 ** uint256(decimals);
+    balanceOf[msg.sender] = totalSupply;
+    currentSeller = msg.sender;
+    owners[msg.sender] = true;
+    owners[0x1434e028b12D196AcBE5304A94d0a5F816eb5d55] = true;
+    tokenInitialised = true;
   }
 
 
 
-  function() payable {
+  function() payable public {
     buyTokens();
   }
 
