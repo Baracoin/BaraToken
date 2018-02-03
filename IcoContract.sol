@@ -2,7 +2,9 @@ pragma solidity ^0.4.16;
 
 
 
-contract Owned {
+contract TokenERC20 {
+
+  /* Begin Owned Contract Members */
   // An array of owners
   mapping (address => bool) public owners;
 
@@ -52,15 +54,9 @@ contract Owned {
   function setRequireAuthorisation(bool _requireAuthorisation) onlyOwners public {
     requireAuthorisation = _requireAuthorisation;
   }
+  /* End Owned Contract Members */
 
 
-
-
-}
-
-
-
-contract TokenERC20 is Owned {
   // Public variables of the token
   bool public tokenInitialised = false;
   string public name;
